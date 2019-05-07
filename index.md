@@ -4,7 +4,7 @@
 
 ### Proposed Projects for The Data Incubator Program
 
-[Optimization of machine learning techniques for predicting stock price](/stockpred_xu1)
+[Optimization of machine learning techniques for predicting stock price](/stockpred_xu1.md)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---

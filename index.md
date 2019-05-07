@@ -2,9 +2,9 @@
 
 ---
 
-### Category Name 1 
+### Proposed Projects for The Data Incubator Program
 
-[Project 1 Title](/sample_page)
+[Optimization of machine learning techniques for predicting stock price](/stockpred_xu1)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---

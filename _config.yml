@@ -2,9 +2,11 @@ title: Frank Xu # your name (or website title) here
 logo: "/images/logo.png?raw=true" # your photo (or logo) here
 description: > # your text below (remove <br> elements if you don't need line breaks)
  Obtaining insights from data/events for business amd environmental health services
-  <br><br>
-  Ph.D. cadidate in Spatial Information Science and Engineering; Ph.D. in Molecular Genetics & Biotechnology
-  <br><br>
+  <br>
+  Ph.D. cadidate in Spatial Information Science and Engineering;
+  <br>
+  Ph.D. in Molecular Genetics & Biotechnology
+  <br>
   <a href="https://www.linkedin.com/in/example/">View My LinkedIn Profile</a> 
   
 theme: jekyll-theme-minimal

@@ -11,7 +11,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 %matplotlib inline
 stock_data = pd.read_csv("amzn2014-2019.csv")
-}
 ```
 ## 2. Converting all data elements to numeric or datetime
 ```javascript
@@ -21,7 +20,6 @@ stock_data['volume'] = pd.to_numeric(stock_data['volume'], errors='coerce')
 stock_data['open'] = pd.to_numeric(stock_data['open'], errors='coerce')
 stock_data['high'] = pd.to_numeric(stock_data['high'], errors='coerce')
 stock_data['low'] = pd.to_numeric(stock_data['low'], errors='coerce')
-}
 ```
 ## 3. Day average of stock price and volume of the traded stocks as input
 ```javascript
@@ -31,7 +29,6 @@ import math
 stock_data["average"] = stock_data.apply(lambda row: (int(row.high) + int(row.low))/2, axis=1)
 input_feature= stock_data.iloc[:,[2,6]].values # become array type of data
 input_data = input_feature
-}
 ```
 ### 4. The first plot for the traded volume for the day
 ```javascript
@@ -41,7 +38,6 @@ plt.title("Volume of stocks sold")
 plt.xlabel("Time (most current-> oldest) (5/6/2019-5/6/2014)")
 plt.ylabel("Volume of stocks traded")
 plt.show()
-}
 ```
 ### The first plot on volume for the AMZN stocks traded for the day
 
@@ -56,7 +52,6 @@ plt.title("Amazon Stock Prices")
 plt.xlabel("Time (latest-> oldest) (5/6/2019-5/6/2014)")
 plt.ylabel("Average Stock Price for The Day")
 plt.show()
-}
 ```
 ### The second plot on the AMZN average day stock price
 

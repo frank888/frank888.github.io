@@ -8,7 +8,7 @@
 <img src="images/plot1.png?raw=true"/>
 
 ---
-[Project 2 Title](/pdf/sample_presentation.pdf)
+[STES eventization and similarity computation](/STS.eventize.html)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---

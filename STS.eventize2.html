@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">
+<html>
+<head>
+<META http-equiv=Content-Type content="text/html; charset=UTF-8">
+<title>Exported from Notepad++</title>
+<style type="text/css">
+span {
+	font-family: 'Courier New';
+	font-size: 10pt;
+	color: #000000;
+}
+.sc0 {
+}
+</style>
+</head>
+<body>
+<div style="float: left; white-space: pre; line-height: 1; background: #FFFFFF; "><span class="sc0"># Autors: Fuyu Frank Xu and Kate Beard, School of Computing and Information Science, University of Maine, Orono, Maine
+# Function name: STS.eventize2().
+# This function can be used to eventize a univariate spatial time series matrix considering event magnitude based on different levels of threshold.
+# These thresholds can be either user-specified numerical values or percentiles. This eventization is to categorize the original data to different
+# levels of event.
+# Description of variables: data--input STES matrix; evtDef--event definition, takes either percentile or absolute value for threshold with the two default percentiles
+# 0.85 and 0.95; magn--levels of event significance; level--letters representting levels of event significance; thres--values corresponding magn or level; 
+# event--takes either "greater" or "lower" depending on how to define the event greater or lower than the threshold.
+# Modified date: May, 2019
+
+STS.eventize2 &lt;- function(data,evtDef="percentile",magn=2, level=c("A","B","C","D","E","F"),thres=c(0.85,0.95),event="greater"){
+        # ----------------------------------------------- Test for errors if input data is not matrix format ------------------------------ 
+        #   
+        if(!is.matrix(data)){
+            print("!---------------------  ERROR #001  -----------------!")
+            print("!     Input data file 'data' is not a matrix!        !")
+            print("!----------------------------------------------------!")
+            return()
+        } # end of matrix input check
+        # ----------------------------------------------- Eventization --------------------------------------------------------------------
+        tmp = magn
+        if(evtDef=="percentile"){
+        
+            if(event=="greater"){ #ascending percentiles in threshold vector
+                data[data&gt;=quantile(data,thres[tmp],na.rm=TRUE)]=level[tmp]
+                data[data&lt;quantile(data,thres[1],na.rm=TRUE)]=0
+                for(i in 1:tmp-1){
+                    data[data&gt;=quantile(data,thres[i],na.rm=TRUE) &amp; data&lt;quantile(data,thres[i+1],na.rm=TRUE)]=level[i]
+                } #end of for loop
+            } # end if greater
+            
+            if(event=="smaller"){ #descending percentiles in threshold vector
+                data[data&lt;=quantile(data,thres[tmp],na.rm=TRUE)]=level[tmp]
+                data[data&gt;quantile(data,thres[1],na.rm=TRUE)]=0
+                for(i in 1:tmp-1){
+                    data[data&lt;=quantile(data,thres[i],na.rm=TRUE) &amp; data&gt;quantile(data,thres[i+1],na.rm=TRUE)]=level[i]
+                } #end of for loop
+            } # end if smaller
+        } # end if percentile
+
+        if(evtDef=="absolute"){
+        
+            if(event=="greater"){
+                data[data&gt;=thres[tmp]]=level[tmp]
+                data[data&lt;thres[1]]=0
+                for(i in 1:tmp-1){
+                    data[data&gt;=thres[i] &amp; data&lt;thres[i+1]]=level[i]
+                } #end of for loop
+            } # end if greater
+            
+            if(event=="smaller"){
+                data[data&lt;=thres[tmp]]=level[tmp]
+                data[data&gt;thres[1]]=0
+                for(i in 1:tmp-1){
+                    data[data&lt;=thres[i] &amp; data&gt;thres[i+1]]=level[i]
+                } #end of for loop
+            } # end if smaller
+        } # end if absolute
+        
+        data[data=="0"]=0
+        for(i in 1:tmp){
+            data[data==level[i]]=i
+        } #end of for loop
+        
+        data=apply(data,2,as.numeric)
+        
+    return(data)
+
+    } # end function STS.eventize2</span></div></body>
+</html>

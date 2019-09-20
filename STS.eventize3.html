@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">
+<html>
+<head>
+<META http-equiv=Content-Type content="text/html; charset=UTF-8">
+<title>Exported from Notepad++</title>
+<style type="text/css">
+span {
+	font-family: 'Courier New';
+	font-size: 10pt;
+	color: #000000;
+}
+.sc0 {
+}
+</style>
+</head>
+<body>
+<div style="float: left; white-space: pre; line-height: 1; background: #FFFFFF; "><span class="sc0"># Autors: Fuyu Frank Xu and Kate Beard, School of Computing and Information Science, University of Maine, Orono, Maine
+# Function name: STS.eventize3().
+# This function can be used to eventize a univariate spatial time series matrix considering event magnitude based on different levels of threshold.
+# These thresholds can be either user-specified numerical values or percentiles. This eventization is to categorize the original data to different
+# levels of event.
+# Description of variables: evtDef--event definition, takes either percentile or absolute value for threshold with the default percentile 0.95.
+# event: takes either "greater" or "lower" depending on how to define the event greater or lower than the threshold.
+# Modified date: May, 2019
+
+STS.eventize3 &lt;- function(data,evtDef="percentile",magn=2,thres=c(0.85,0.95),event="greater"){
+        # ----------------------------------------------- Test for errors if input data is not matrix format ------------------------------ 
+        #   
+        if(!is.matrix(data)){
+            print("!---------------------  ERROR #001  -----------------!")
+            print("!     Input data file 'data' is not a matrix!        !")
+            print("!----------------------------------------------------!")
+            return()
+        } # end of matrix input check
+        # ----------------------------------------------- Eventization --------------------------------------------------------------------
+        tmp = magn
+        nr = nrow
+        nl = ncol
+        
+        if(evtDef=="percentile"){
+        
+            if(event=="greater"){ #ascending percentiles in threshold vector
+            
+                for(i in 1:nr){
+                    for(j in 1:nl){
+                        if(data[i,j] &gt;= quantile(data,thres[tmp],na.rm=TRUE)) {data[i,j] = tmp}
+                        else if (data[i,j] &lt; quantile(data,thres[1],na.rm=TRUE)) {data[i,j] = 0}
+                        else for(k in 1:tmp-1){
+                                if (data[i,j] &gt;= quantile(data,thres[k],na.rm=TRUE) &amp;&amp; data[i,j] &lt; quantile(data,thres[k+1],na.rm=TRUE)) {data[i,j]= k}
+                             } #end of for loop
+                    } # end of J loop
+                } # end of I loop
+                    
+            } # end if greater
+            
+            if(event=="smaller"){ #descending percentiles in threshold vector
+                data[data&lt;=quantile(data,thres[tmp],na.rm=TRUE)]=level[tmp]
+                data[data&gt;quantile(data,thres[1],na.rm=TRUE)]=0
+                for(i in 1:tmp-1){
+                    data[data&lt;=quantile(data,thres[i],na.rm=TRUE) &amp; data&gt;quantile(data,thres[i+1],na.rm=TRUE)]=level[i]
+                } #end of for loop
+            } # end if smaller
+        } # end if percentile
+
+        if(evtDef=="absolute"){
+        
+            if(event=="greater"){ #ascending values in threshold vector
+            
+                for(i in 1:nr){
+                    for(j in 1:nl){
+                        if(data[i,j] &gt;= thres[tmp]) {data[i,j] = tmp}
+                        else if (data[i,j] &lt; thres[1]) {data[i,j] = 0}
+                        else { for(k in 1:tmp-1){
+                                if (data[i,j] &gt;= thres[k] &amp;&amp; data[i,j] &lt; thres[k+1]) {catv= k} #identify the category value for the observed measurement
+                             } #end of for loop
+                             data[i,j] = catv }
+                    } # end of J loop
+                } # end of I loop
+
+            } # end if greater
+            
+            if(event=="smaller"){
+                data[data&lt;=thres[tmp]]=level[tmp]
+                data[data&gt;thres[1]]=0
+                for(i in 1:tmp-1){
+                    data[data&lt;=thres[i] &amp; data&gt;thres[i+1]]=level[i]
+                } #end of for loop
+            } # end if smaller
+        } # end if absolute
+        
+
+    return(data)
+
+    } # end function STS.eventize3</span></div></body>
+</html>

@@ -1,17 +1,12 @@
 ## STES eventization and similarity computation
 
----
-Eventization functions in R:
----
-[STS.eventize](/STS.eventize.html)
----
-[STS.eventize1](/STS.eventize1.html)
----
-[STS.eventize2](/STS.eventize2.html)
----
-[STS.eventize3](/STS.eventize3.html)
----
-Similarity compuatation functions in R:
+### Eventization functions in R:
+1. [STS.eventize](/STS.eventize.html)
+2. [STS.eventize1](/STS.eventize1.html)
+3. [STS.eventize2](/STS.eventize2.html)
+4. [STS.eventize3](/STS.eventize3.html)
+ 
+## Similarity compuatation functions in R:
 ---
 [STES.sim1](/STES.sim1.html)
 ---

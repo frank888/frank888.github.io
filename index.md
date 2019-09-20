@@ -9,6 +9,7 @@
 
 ---
 [STES eventization and similarity computation](/STES_similarity.html)
+
 ---
 
 ### Learning programming languages

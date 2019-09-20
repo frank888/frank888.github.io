@@ -9,6 +9,7 @@
 
 ---
 [STES eventization and similarity computation](/STES_similarity.html)
+<img src="images/STES_event-sim.png?raw=true"/>
 
 ---
 

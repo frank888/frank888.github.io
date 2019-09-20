@@ -2,7 +2,7 @@
 
 ---
 
-### Proposed Projects for The Data Incubator Program
+### Projects on data mining and Spatiotemporal event sequence (STES) similarity measures
 
 [Optimization of machine learning techniques for predicting stock price](/stockpred_xu1.md)
 <img src="images/plot1.png?raw=true"/>
@@ -10,18 +10,14 @@
 ---
 [STES eventization and similarity computation](/STES_similarity.html)
 ---
-[Project 3 Title](http://example.com/)
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
 
----
+### Learning programming languages
 
-### Category Name 2
-
-- [Project 1 Title](http://example.com/)
-- [Project 2 Title](http://example.com/)
-- [Project 3 Title](http://example.com/)
-- [Project 4 Title](http://example.com/)
-- [Project 5 Title](http://example.com/)
+- [R Learning]
+- [Python Learning]
+- [Java Learning]
+- [C# Learning]
+- [Machine learning and deep learning]
 
 ---
 

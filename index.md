@@ -8,9 +8,7 @@
 <img src="images/plot1.png?raw=true"/>
 
 ---
-[STES eventization and similarity computation](/STS.eventize.html)
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
-
+[STES eventization and similarity computation](/STES_similarity.html)
 ---
 [Project 3 Title](http://example.com/)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>

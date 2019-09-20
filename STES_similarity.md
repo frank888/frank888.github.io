@@ -7,15 +7,9 @@
 4. [STS.eventize3](/STS.eventize3.html)
  
 ## Similarity compuatation functions in R:
----
-[STES.sim1](/STES.sim1.html)
----
-[STES.sim2](/STES.sim2.html)
----
-[STES.sim3](/STES.sim3.html)
----
-[STES.simOr](/STES.simOr.html)
----
-[STES.simOr2](/STES.simOr2.html)
----
----
+
+1. [STES.sim1](/STES.sim1.html)
+2. [STES.sim2](/STES.sim2.html)
+3. [STES.sim3](/STES.sim3.html)
+4. [STES.simOr](/STES.simOr.html)
+5. [STES.simOr2](/STES.simOr2.html)

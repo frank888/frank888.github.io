@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">
+<html>
+<head>
+<META http-equiv=Content-Type content="text/html; charset=UTF-8">
+<title>Exported from Notepad++</title>
+<style type="text/css">
+span {
+	font-family: 'Courier New';
+	font-size: 10pt;
+	color: #000000;
+}
+.sc0 {
+}
+</style>
+</head>
+<body>
+<div style="float: left; white-space: pre; line-height: 1; background: #FFFFFF; "><span class="sc0"># Autors: Fuyu Frank Xu and Kate Beard, School of Computing and Information Science, University of Maine, Orono, Maine
+# Function name: STES.sim1().
+# This function computes pairwise STES similarity matrix especially for inputing a spatiotemporal event sequence (STES) matrix  with interval/ratio values and
+# is used together with STES.sim2 and STES.sim3.
+#
+# Modified date: May, 2019
+
+STES.sim1 &lt;- function(data){
+        # ----------------------------------------------- Test for errors if input data is not matrix format ------------------------------ 
+        #  
+        if(!is.matrix(data)){
+            print("!---------------------  ERROR #001  -----------------!")
+            print("!     Input data file 'data' is not a matrix!        !")
+            print("!----------------------------------------------------!")
+            return()
+        } # end of matrix input check
+        # ----------------------------------------------- Eventization --------------------------------------------------------------------
+        options(digits = 2) #keep 2 digits after decimal
+        nr = nrow(data)     #number of rows
+        nc = ncol(data)     #number of columns
+        s &lt;- rep(0, nr)     #empty vector for storing number of occurred events at each location
+    
+        #calculate total number of occurred events for each location        
+        for (i in 1:nr){
+            for (j in 1:nc){
+                if (data[i,j] != 0 ) {s[i] = s[i] + 1}
+            } # end of J loop
+        }# end of I loop
+        
+        eventsim = diag(nr)  #initialize an empty matirix for stroing pairwise similarity values with an identity matirix
+        rownames(eventsim) &lt;- c(rownames(data))
+        colnames(eventsim) &lt;- c(rownames(data))
+        scn = 0  # zero initialize the number of coocurred events between two sequences
+        for(i in 1:(nr-1)){
+            for (k in (i+1):nr){
+                for (j in 1:nc){
+                    if(data[i,j] != 0 &amp; data[k,j] != 0 ){
+                        scn = scn + 1
+                        eventsim[i,k] = eventsim[i,k] + 1-abs(data[i,j]/(data[i,j] + data[k,j]) - data[k,j]/(data[i,j] + data[k,j]))
+                    }
+                } # end of J loop
+                eventsim[i,k] = eventsim[i,k]/(s[i] + s[k] - scn)
+                eventsim[k,i] = eventsim[i,k]
+                scn = 0
+            } # end of k loop
+        } # end of I loop
+
+    return(eventsim)
+
+    } # end function STES.sim1</span></div></body>
+</html>

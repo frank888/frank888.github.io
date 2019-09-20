@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">
+<html>
+<head>
+<META http-equiv=Content-Type content="text/html; charset=UTF-8">
+<title>Exported from Notepad++</title>
+<style type="text/css">
+span {
+	font-family: 'Courier New';
+	font-size: 10pt;
+	color: #000000;
+}
+.sc0 {
+}
+</style>
+</head>
+<body>
+<div style="float: left; white-space: pre; line-height: 1; background: #FFFFFF; "><span class="sc0"># Autors: Fuyu Frank Xu and Kate Beard, School of Computing and Information Science, University of Maine, Orono, Maine
+# Function name: STES.sim3().
+# This function is used after running STES.sim1 and outputs not only global and local similarity matrices separately but also an ingetrated matrix including
+# pairwise global and local similarity values.
+#
+# Modified date: May, 2019
+
+STES.sim2 &lt;- function(data,ctw=1){
+        # ----------------------------------------------- Test for errors if input data is not matrix format ------------------------------ 
+        #   
+        if(!is.matrix(data)){
+            print("!---------------------  ERROR #001  -----------------!")
+            print("!     Input data file 'data' is not a matrix!        !")
+            print("!----------------------------------------------------!")
+            return()
+        } # end of matrix input check
+        # ----------------------------------------------- Eventization --------------------------------------------------------------------
+        nr = nrow(data) #number of rows
+        nc = ncol(data) #number of columns
+        nw = nc%/%ctw   #number of complete local temporal windows
+        nm = nc%%ctw    #modulus
+        
+        cnp = nw         #column number of pairwise similarity matrix
+        if (nm != 0) { cnp = cnp + 1}
+        #calculate number of rows for the matrix of pairwise similarity
+        #the same number of pairwise comparisons
+        rnp = 0 #initialize row number of pairwise comparisons
+        for (i in 1:(nr-1)){
+            for (j in (i+1):nr){
+                rnp = rnp + 1
+            }
+        }
+        #create an empty matrix for storing global and local pairwise similarity
+        grandsim &lt;- matrix( , rnp, cnp+1)
+        rnames &lt;- rep(NA, rnp)  #store new row names for combined similarity matrix
+        cnames &lt;- rep(NA, cnp+1)    #store new column names for combined similarity matrix
+     
+        cat('Original STES matrix', "\n")
+        print(data)
+        cat("\n")
+        
+        globalsim = STES.sim1(data=data)
+        
+        rnp = 0
+        for (i in 1:(nr-1)){
+            for (j in (i+1):nr){
+                rnp = rnp + 1
+                grandsim[rnp,1] = globalsim[i,j]
+                rnames[rnp]  = paste(rownames(globalsim)[i], rownames(globalsim)[j], sep = "-")
+            }
+        }
+      
+        cnames[1] = "Entire"    #column for global similarity
+ 
+        cat('Global event sequence similarity matrix', "\n")
+        print(globalsim)
+        cat("\n")
+            
+        for (i in 1:nw){
+            subdata = data[,((i-1)*ctw+1):(i*ctw)]
+            localsim = STES.sim1(data=subdata)
+            #combine local similarity matrix to an integrated grand matrix
+            cnames[i+1] = paste("Window",i, sep = "-")
+            rnp = 0
+            for (j in 1:(nr-1)){
+                for (k in (j+1):nr){
+                    rnp = rnp + 1
+                    grandsim[rnp,i+1] = localsim[j,k]
+                }
+            }
+            
+            
+            cat('Local similarity matrix at window ', i, "\n")
+            print(localsim)
+        }
+        
+        if (nm != 0){
+            subdata = data[,(nw*ctw+1):(nw*ctw+nm)]
+            localsim = STES.sim1(data=subdata)
+            cnames[cnp+1] = paste("Window",cnp, sep = "-")
+            rnp = 0
+            for (j in 1:(nr-1)){
+                for (k in (j+1):nr){
+                    rnp = rnp + 1
+                    grandsim[rnp,cnp+1] = localsim[j,k]
+                }
+            }
+                        
+            cat('Local similarity matrix at last incomplete window ', nw+1, "\n")
+            print(localsim)
+        }
+        
+        rownames(grandsim) = c(rnames)
+        colnames(grandsim) = c(cnames)
+        cat("\n") 
+        cat("Integrated global and local similarity matrix", "\n")
+        print(grandsim)
+
+    } # end function STES.sim3</span></div></body>
+</html>

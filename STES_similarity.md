@@ -6,7 +6,7 @@
 3. [STS.eventize2](/STS.eventize2.html)
 4. [STS.eventize3](/STS.eventize3.html)
  
-## Similarity compuatation functions in R:
+### Similarity compuatation functions in R:
 
 1. [STES.sim1](/STES.sim1.html)
 2. [STES.sim2](/STES.sim2.html)

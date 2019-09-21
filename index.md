@@ -2,7 +2,7 @@
 
 ---
 
-### Projects on data mining and Spatiotemporal event sequence (STES) similarity measures
+### Projects on data mining and spatiotemporal event sequence (STES) similarity measures
 
 [Optimization of machine learning techniques for predicting stock price](/stockpred_xu1.md)
 <img src="images/plot1.png?raw=true"/>
